@@ -1,4 +1,4 @@
-variable "DB_USERNAME" {
+variable "DB_USER" {
     description = "The username for the database"
     type = string
 }

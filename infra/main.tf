@@ -11,7 +11,7 @@ module "documentdb_cluster" {
     
     name                    = "docdb"
     cluster_size            = 1
-    master_username         = var.DB_USERNAME
+    master_username         = var.DB_USER
     master_password         = var.DB_PASSWORD
     instance_class          = "db.t3.medium"
     vpc_id                  = data.aws_subnet.subnet.vpc_id
