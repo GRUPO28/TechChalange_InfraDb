@@ -6,7 +6,7 @@ Este repositório contém apenas a infraestutura referente ao banco de dados. Pa
 
 Para este projeto utilizamos o MongoDB como banco de dados principal, sendo este um DB NoSQL que trabalha com documentos no formato JSON.
 
-Como provedor, estamos utilizando o [Atlas](https://www.mongodb.com/pt-br/lp/cloud/atlas/try4), que fornece um MongoDB via cloud e totalmente gerenciado.
+Como provedor, estamos utilizando o [Amazon DocumentDB](https://aws.amazon.com/pt/documentdb/). Um serviço de banco de dados de documentos rápido, escalável, altamente disponível e totalmente gerenciado que oferece suporte a cargas de trabalho do MongoDB.
 
 ## 1.1 Modelagem
 
