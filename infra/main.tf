@@ -1,7 +1,14 @@
-data "aws_subnet" "subnet" {
+data "aws_vpc" "default-vpc" {
   filter {
     name   = "tag:Name"
-    values = ["default-1a"]
+    values = ["default-us-east-1"]
+  }
+}
+
+data "aws_subnets" "subnets" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default-vpc.id]
   }
 }
 
@@ -14,7 +21,7 @@ module "documentdb_cluster" {
     master_username         = var.DB_USER
     master_password         = var.DB_PASSWORD
     instance_class          = "db.t3.medium"
-    vpc_id                  = data.aws_subnet.subnet.vpc_id
-    subnet_ids              = [data.aws_subnet.subnet.id]
+    vpc_id                  = data.aws_vpc.default-vpc.id
+    subnet_ids              = data.aws_subnets.subnets.ids
     # allowed_security_groups = ["sg-xxxxxxxx"]
 }
