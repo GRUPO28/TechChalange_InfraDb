@@ -14,6 +14,10 @@ jobs:
     name: Validate Infra with Terraform
     runs-on: ubuntu-latest
 
+    env:
+        TF_VAR_DB_USER: ${{ secrets.TF_VAR_DB_USER }}
+        TF_VAR_DB_PASSWORD: ${{ secrets.TF_VAR_DB_PASSWORD }}
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
