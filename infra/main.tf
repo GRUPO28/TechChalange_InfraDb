@@ -26,10 +26,10 @@ module "documentdb_cluster" {
     vpc_id                  = data.aws_vpc.default-vpc.id
     subnet_ids              = data.aws_subnets.subnets.ids
     allowed_cidr_blocks     = ["0.0.0.0/0"]
-    cluster_parameters      = list(object({
-                              apply_method = "pending-reboot"
-                              name         = "tls"
-                              value        = "disabled"
-                            }))
+    cluster_parameters      = [{
+                                apply_method = "pending-reboot"
+                                name         = "tls"
+                                value        = "disabled"
+                              }]
     # allowed_security_groups = ["sg-xxxxxxxx"]
 }
