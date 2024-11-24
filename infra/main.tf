@@ -60,7 +60,7 @@ resource "aws_db_instance" "mysql_free_tier" {
   allocated_storage    = 20                      # Free Tier nao mudar
   storage_type         = "gp2"                   # Free Tier nao mudar
   engine               = "mysql"                 
-  engine_version       = "8.0.28"                
+  engine_version       = "8.0"                
   instance_class       = "db.t2.micro"           # Free Tier nao mudar
   db_name              = "pedido"            
   username             = var.DB_USER            
