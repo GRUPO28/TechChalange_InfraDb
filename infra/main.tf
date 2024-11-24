@@ -33,3 +33,45 @@ module "documentdb_cluster" {
                               }]
     # allowed_security_groups = ["sg-xxxxxxxx"]
 }
+
+# Security Group para permitir acesso ao RDS
+resource "aws_security_group" "rds_sg" {
+  name        = "rds-sg"
+  description = "Allow MySQL access"
+  vpc_id = data.aws_vpc.default-vpc.id
+
+  ingress {
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+# Instância MySQL elegível ao Free Tier
+resource "aws_db_instance" "mysql_free_tier" {
+  allocated_storage    = 20                      # Free Tier nao mudar
+  storage_type         = "gp2"                   # Free Tier nao mudar
+  engine               = "mysql"                 
+  engine_version       = "8.0.28"                
+  instance_class       = "db.t2.micro"           # Free Tier nao mudar
+  db_name              = "pedido"            
+  username             = var.DB_USER            
+  password             = var.DB_PASSWORD
+  publicly_accessible  = true
+  vpc_security_group_ids = [aws_security_group.rds_sg.id] # configurar VPC
+  backup_retention_period = 7                    
+  skip_final_snapshot     = true                 
+  multi_az                = false                # Free Tier nao mudar
+
+  tags = {
+    name = "MySQL-FreeTier"
+  }
+}
